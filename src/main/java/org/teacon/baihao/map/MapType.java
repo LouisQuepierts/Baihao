@@ -9,7 +9,7 @@ import org.teacon.baihao.compat.XaeroMinimapCompat;
 
 public enum MapType {
     NONE("baihao.map.none.name","baihao.map.none.description", null),
-    X3D("baihao.map.x3d.name","baihao.map.x3d.description", null){
+    X3D("baihao.map.x3d.name","baihao.map.x3d.description", "x3dmap_example.png"){
         @Override
         public void setEnable(boolean enable) {
             ClientConfig.MINIMAP_ENABLED.set(enable);
@@ -21,7 +21,7 @@ public enum MapType {
             return ModList.get().isLoaded("x3d_map");
         }
     },
-    GZT("baihao.map.gzt.name","baihao.map.gzt.description", null){
+    GZT("baihao.map.gzt.name","baihao.map.gzt.description", "gzt.png"){
         @Override
         public void setEnable(boolean enable) {
             AleeveAtlasClient.CONFIG.display = enable;

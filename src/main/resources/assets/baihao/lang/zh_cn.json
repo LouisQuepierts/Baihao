@@ -1,0 +1,13 @@
+{
+  "baihao.screen.map_switch.title": "选择小地图",
+  "baihao.map.none.name": "无",
+  "baihao.map.none.description": "",
+  "baihao.map.x3d.name": "x3d map",
+  "baihao.map.x3d.description": "高性能的新型3D小地图",
+  "baihao.map.gzt.name": "袖里舆图",
+  "baihao.map.gzt.description": "开源但可能不太好用的小地图",
+  "baihao.map.jmap.name": "旅行地图",
+  "baihao.map.jmap.description": "",
+  "baihao.map.xmap.name": "Xaero 小地图",
+  "baihao.map.xmap.description": ""
+}

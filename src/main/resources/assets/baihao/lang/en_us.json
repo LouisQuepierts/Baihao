@@ -1,0 +1,13 @@
+{
+  "baihao.screen.map_switch.title": "Select Map",
+  "baihao.map.none.name": "None",
+  "baihao.map.none.description": "A high-performance new type of 3D minimap",
+  "baihao.map.x3d.name": "X3D Map",
+  "baihao.map.x3d.description": "",
+  "baihao.map.gzt.name": "Aleeve Atlas",
+  "baihao.map.gzt.description": "An open-source but possibly not very user-friendly minimap",
+  "baihao.map.jmap.name": "JourneyMap",
+  "baihao.map.jmap.description": "",
+  "baihao.map.xmap.name": "Xaero's Minimap",
+  "baihao.map.xmap.description": ""
+}
