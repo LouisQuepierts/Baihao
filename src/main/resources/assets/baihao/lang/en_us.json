@@ -9,5 +9,7 @@
   "baihao.map.jmap.name": "JourneyMap",
   "baihao.map.jmap.description": "",
   "baihao.map.xmap.name": "Xaero's Minimap",
-  "baihao.map.xmap.description": ""
+  "baihao.map.xmap.description": "",
+  "baihao.motd.select_map": "[Click to choose minimap]",
+  "baihao.motd.hide": "[Do not show again]"
 }

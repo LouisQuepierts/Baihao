@@ -9,5 +9,7 @@
   "baihao.map.jmap.name": "旅行地图",
   "baihao.map.jmap.description": "",
   "baihao.map.xmap.name": "Xaero 小地图",
-  "baihao.map.xmap.description": ""
+  "baihao.map.xmap.description": "",
+  "baihao.motd.select_map": "[点此选择小地图]",
+  "baihao.motd.hide": "[不再显示]"
 }

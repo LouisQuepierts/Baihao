@@ -14,6 +14,7 @@ public class ClientConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
     
     public static final ModConfigSpec.EnumValue<MapType> SELECTED_MAP_TARGET = BUILDER.defineEnum("selectedMapTarget", MapType.NONE);
+    public static final ModConfigSpec.BooleanValue SHOW_MOTD = BUILDER.define("showMotd", true);
 
     static final ModConfigSpec SPEC = BUILDER.build();
     
@@ -26,6 +27,11 @@ public class ClientConfig {
         SELECTED_MAP_TARGET.set(mapType);
         SPEC.save();
         update();
+    }
+    
+    public static void setShowMotd(boolean showMotd) {
+        SHOW_MOTD.set(showMotd);
+        SPEC.save();
     }
     
     @SubscribeEvent
