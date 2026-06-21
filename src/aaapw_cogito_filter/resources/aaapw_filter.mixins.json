@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "org.teacon.baihao.modules.cn.chloeprime.aaapw_filter.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+  ],
+  "client": [
+    "MixinAAAPWClientConfig"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
