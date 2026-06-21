@@ -1,0 +1,5 @@
+{
+  "order": 20,
+  "icon": "aaapw_filter:slot/aaapw_filter_bci_empty",
+  "validators": ["curios:tag"]
+}
