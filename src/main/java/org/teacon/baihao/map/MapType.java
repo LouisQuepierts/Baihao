@@ -66,7 +66,6 @@ public enum MapType {
     }
     
     public void setEnable(boolean enable) {
-    
     }
     
     public boolean valid(){
