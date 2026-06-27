@@ -24,6 +24,8 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: $${{ runner.os }}-gradle
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
       - name: Maven Publish
         id: maven_publish
         env:
