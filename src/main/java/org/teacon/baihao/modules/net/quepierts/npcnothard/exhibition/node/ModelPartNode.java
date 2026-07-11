@@ -47,14 +47,14 @@ public class ModelPartNode extends ExhibitionNode implements Inspectable {
     );
 
     public static final NumberConstraint<Float> POSITION = NumberConstraint.number(
-            -128f,
-            128f,
+            -1024.0f,
+            1024.0f,
             0.0f
     );
 
     public static final NumberConstraint<Float> SCALE = NumberConstraint.number(
             0.0f,
-            128f,
+            64.0f,
             1.0f
     );
 
