@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.function.Function;
 
 @Mixin(HumanoidModel.class)
-public class HumanoidModelMixin implements ExhibitionModelExtension {
+public class HumanoidModelMixin {
 
     @Shadow
     @Final
@@ -64,6 +64,23 @@ public class HumanoidModelMixin implements ExhibitionModelExtension {
 
     @Inject(
             method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;)V",
+            at = @At("HEAD")
+    )
+    private void npcnh$reset(
+            final HumanoidRenderState state,
+            final CallbackInfo ci
+    ) {
+        // reset visible, prevent unexpected problem
+        this.head.visible = true;
+        this.body.visible = true;
+        this.leftArm.visible = true;
+        this.rightArm.visible = true;
+        this.leftLeg.visible = true;
+        this.rightLeg.visible = true;
+    }
+
+    @Inject(
+            method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;)V",
             at = @At("TAIL")
     )
     private void npcnh$setupAnim(
@@ -74,12 +91,6 @@ public class HumanoidModelMixin implements ExhibitionModelExtension {
         if (pose != null) {
             this.npcnh$modelOverrider.apply(pose);
         }
-    }
-
-    @Unique
-    @Override
-    public ExhibitionModelOverride npcnh$getModelOverrider() {
-        return this.npcnh$modelOverrider;
     }
 
 }

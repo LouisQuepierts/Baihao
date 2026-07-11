@@ -17,6 +17,7 @@ import org.teacon.baihao.modules.net.quepierts.npcnothard.inspection.Duplicatabl
 import org.teacon.baihao.modules.net.quepierts.npcnothard.inspection.Inspectable;
 import org.teacon.baihao.modules.net.quepierts.npcnothard.inspection.InspectorBuilder;
 import org.teacon.baihao.modules.net.quepierts.npcnothard.inspection.constraint.NumberConstraint;
+import org.teacon.baihao.modules.net.quepierts.npcnothard.inspection.property.BooleanProperty;
 import org.teacon.baihao.modules.net.quepierts.npcnothard.inspection.property.FloatProperty;
 import org.teacon.baihao.modules.net.quepierts.npcnothard.inspection.property.StringProperty;
 
@@ -34,7 +35,8 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
             Codec.FLOAT.fieldOf("z").forGetter(EntityNode::getZ),
             Codec.FLOAT.fieldOf("yaw").forGetter(EntityNode::getYaw),
             Codec.FLOAT.fieldOf("pitch").forGetter(EntityNode::getPitch),
-            Codec.STRING.optionalFieldOf("name", "").forGetter(EntityNode::getName)
+            Codec.STRING.optionalFieldOf("name", "").forGetter(EntityNode::getName),
+            Codec.BOOL.optionalFieldOf("showName", false).forGetter(EntityNode::isShowName)
     ).apply(instance, EntityNode::new));
 
     public static final StreamCodec<ByteBuf, EntityNode> STREAM_CODEC = StreamCodec.composite(
@@ -50,6 +52,8 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
             EntityNode::getPitch,
             ByteBufCodecs.STRING_UTF8,
             EntityNode::getName,
+            ByteBufCodecs.BOOL,
+            EntityNode::isShowName,
             EntityNode::new
     );
 
@@ -63,6 +67,7 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
     private final FloatProperty pitch       = FloatProperty.simple(0);
 
     private final StringProperty name       = StringProperty.simple("");
+    private final BooleanProperty showName  = BooleanProperty.simple(false);
 
     private final NumberConstraint<Float> cx;
     private final NumberConstraint<Float> cy;
@@ -75,7 +80,8 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
                 (float) entity.getZ(),
                 Mth.wrapDegrees(entity.getYRot()),
                 Mth.wrapDegrees(entity.getXRot()),
-                ""
+                "",
+                false
         );
     }
 
@@ -85,9 +91,10 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
             final float z,
             final float yaw,
             final float pitch,
-            final String name
+            final String name,
+            final boolean showName
     ) {
-        this.setup(x, y, z, yaw, pitch, name);
+        this.setup(x, y, z, yaw, pitch, name, showName);
 
         this.cx = NumberConstraint.number(x - RANGE, x + RANGE, x);
         this.cy = NumberConstraint.number(y - RANGE, y + RANGE, y);
@@ -110,6 +117,7 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
 
                 .space()
                 .inputString(Component.literal("Name"), this.name)
+                .checkbox(Component.literal("Custom Name Visible"), this.showName)
         ;
     }
 
@@ -132,7 +140,8 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
                 this.z.getValue(),
                 this.yaw.getValue(),
                 this.pitch.getValue(),
-                this.name.get()
+                this.name.get(),
+                this.showName.get()
         );
     }
 
@@ -146,6 +155,7 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
             this.yaw.setValue(node.yaw.getValue());
             this.pitch.setValue(node.pitch.getValue());
             this.name.set(node.name.get());
+            this.showName.set(node.showName.get());
         }
     }
 
@@ -162,7 +172,8 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
                 (float) entity.getZ(),
                 entity.getYRot(),
                 entity.getXRot(),
-                this.name.get()
+                this.name.get(),
+                this.showName.get()
         );
     }
 
@@ -187,6 +198,7 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
         } else if (entity.hasCustomName()) {
             entity.setCustomName(null);
         }
+        entity.setCustomNameVisible(this.showName.get());
     }
 
     private void setup(
@@ -195,7 +207,8 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
             final float z,
             final float yaw,
             final float pitch,
-            final String name
+            final String name,
+            final boolean showName
     ) {
         this.x          .setValue(x);
         this.y          .setValue(y);
@@ -203,6 +216,7 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
         this.yaw        .setValue(yaw);
         this.pitch      .setValue(pitch);
         this.name       .set(name);
+        this.showName   .set(showName);
     }
 
     public float getX() {
@@ -227,6 +241,10 @@ public class EntityNode extends ExhibitionNode implements Inspectable {
 
     public String getName() {
         return this.name.get();
+    }
+
+    public boolean isShowName() {
+        return this.showName.get();
     }
 
     public @Nullable String getOptionalName() {
