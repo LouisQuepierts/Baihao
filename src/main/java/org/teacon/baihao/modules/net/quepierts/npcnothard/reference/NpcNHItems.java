@@ -48,7 +48,7 @@ public final class NpcNHItems {
                         .spawnEgg(NpcNHEntities.EXHIBITION_HUMANOID.get())
                         .component(
                                 DataComponents.LORE,
-                                new ItemLore(lines("tooltip.npcnh.exhibition_humanoid", 2))
+                                new ItemLore(lines("tooltip.npcnh.exhibition_entity_spawner", 2))
                         )
             );
 

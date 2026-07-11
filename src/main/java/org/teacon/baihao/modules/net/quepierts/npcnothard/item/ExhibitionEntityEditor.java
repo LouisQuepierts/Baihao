@@ -144,35 +144,4 @@ public final class ExhibitionEntityEditor extends Item {
 
         return true;
     }
-
-    @Override
-    public void appendHoverText(
-            final ItemStack itemStack,
-            final TooltipContext context,
-            final TooltipDisplay display,
-            final Consumer<Component> builder,
-            final TooltipFlag tooltipFlag
-    ) {
-        super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
-        builder.accept(
-                Component.translatable("tooltip.npcnh.exhibition_entity_editor1")
-                        .withStyle(ChatFormatting.GRAY)
-        );
-        builder.accept(
-                Component.translatable("tooltip.npcnh.exhibition_entity_editor2")
-                        .withStyle(ChatFormatting.GRAY)
-        );
-        builder.accept(
-                Component.translatable("tooltip.npcnh.exhibition_entity_editor3")
-                        .withStyle(ChatFormatting.GRAY)
-        );
-        builder.accept(
-                Component.translatable("tooltip.npcnh.exhibition_entity_editor4")
-                        .withStyle(ChatFormatting.GRAY)
-        );
-        builder.accept(
-                Component.translatable("tooltip.npcnh.exhibition_entity_editor5")
-                        .withStyle(ChatFormatting.GRAY)
-        );
-    }
 }
