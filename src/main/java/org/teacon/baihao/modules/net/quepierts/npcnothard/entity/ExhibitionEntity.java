@@ -129,7 +129,7 @@ public abstract class ExhibitionEntity extends PathfinderMob {
 
         final var held = player.getItemInHand(hand);
         if (!held.isEmpty()) {
-            return InteractionResult.SUCCESS;
+            return InteractionResult.FAIL;
         }
 
         final var node = this.getExhibitionNode()
@@ -189,6 +189,21 @@ public abstract class ExhibitionEntity extends PathfinderMob {
             result.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true);
         }
         return result;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        // only calculate on client
+        if (this.level().isClientSide()) {
+
+            final var facing = this.getExhibitionNode().getUnique(FacingPlayerNode.UNIQUE_KEY);
+            if (facing != null) {
+                facing.onProcess(this);
+            }
+
+        }
     }
 
     @Override
