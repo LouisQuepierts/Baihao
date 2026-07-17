@@ -51,10 +51,10 @@ public class InteractNode extends ExhibitionNode {
         this.facing = facing;
     }
 
-    public InteractNode(final List<CommandNode> nodes, final FacingPlayerNode facing) {
+    public InteractNode(final List<CommandNode> nodes, final @Nullable FacingPlayerNode facing) {
         this.left   = nodes.get(0);
         this.right  = nodes.get(1);
-        this.facing = facing;
+        this.facing = facing == null ? new FacingPlayerNode() : facing;
     }
 
     @Override
