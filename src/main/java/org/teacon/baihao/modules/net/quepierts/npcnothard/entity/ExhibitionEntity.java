@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.teacon.baihao.modules.net.quepierts.npcnothard.exhibition.ExhibitionNodeManager;
 import org.teacon.baihao.modules.net.quepierts.npcnothard.exhibition.node.EntityNode;
 import org.teacon.baihao.modules.net.quepierts.npcnothard.exhibition.node.ExhibitionNode;
+import org.teacon.baihao.modules.net.quepierts.npcnothard.exhibition.node.FacingPlayerNode;
 import org.teacon.baihao.modules.net.quepierts.npcnothard.exhibition.node.InteractNode;
 import org.teacon.baihao.modules.net.quepierts.npcnothard.reference.NpcNHDataComponents;
 import org.teacon.baihao.modules.net.quepierts.npcnothard.reference.NpcNHEntities;
@@ -90,12 +91,17 @@ public abstract class ExhibitionEntity extends PathfinderMob {
         }
 
         if (source.is(DamageTypes.PLAYER_ATTACK) && source.isDirect()) {
-            final var node = this.getExhibitionNode()
-                    .getUnique(InteractNode.UNIQUE_KEY);
 
-            final var left = node.getLeft();
-            left.invoke(this, ((Player) source.getEntity()));
-        };
+            if (source.getWeaponItem().isEmpty()) {
+
+                final var node = this.getExhibitionNode()
+                        .getUnique(InteractNode.UNIQUE_KEY);
+
+                final var left = node.getLeft();
+                left.invoke(this, ((Player) source.getEntity()));
+
+            }
+        }
 
         return false;
     }
@@ -118,6 +124,11 @@ public abstract class ExhibitionEntity extends PathfinderMob {
     ) {
 
         if (player.level().isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+
+        final var held = player.getItemInHand(hand);
+        if (!held.isEmpty()) {
             return InteractionResult.SUCCESS;
         }
 
@@ -182,6 +193,12 @@ public abstract class ExhibitionEntity extends PathfinderMob {
 
     @Override
     public void aiStep() {
+
+    }
+
+    @Override
+    public void checkDespawn() {
+
     }
 
     static {
